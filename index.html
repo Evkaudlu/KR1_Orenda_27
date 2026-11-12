@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оренда обладнання — Варіант 27</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5f9;
+            padding: 30px;
+        }
+        .container {
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #00000015;
+        }
+        h1 { color: #253b59; }
+        label { display: block; margin-top: 15px; }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 7px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #165dcc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #176b36;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Оренда обладнання</h1>
+        <p>Розрахунок вартості оренди техніки</p>
+
+        <label for="equipment">Оберіть обладнання:</label>
+        <select id="equipment">
+            <option value="500">Перфоратор — 500 грн/день</option>
+            <option value="800">Генератор — 800 грн/день</option>
+            <option value="350">Шуруповерт — 350 грн/день</option>
+        </select>
+
+        <label for="days">Кількість днів оренди:</label>
+        <input type="number" id="days" min="1" value="1">
+
+        <button onclick="calculateRent()">
+            Розрахувати вартість
+        </button>
+
+        <p class="result" id="result"></p>
+    </div>
+
+    <script>
+        function calculateRent() {
+            const price = Number(
+                document.getElementById("equipment").value
+            );
+            const daysInput = document.getElementById("days");
+            const days = Number(daysInput.value);
+            const result = document.getElementById("result");
+
+            if (!daysInput.value.trim() ||
+                !Number.isInteger(days) || days < 1) {
+                result.textContent =
+                    "Введіть коректну кількість днів.";
+                return;
+            }
+
+            const total = price * days;
+
+            result.textContent =
+                "Загальна вартість оренди: " +
+                total.toLocaleString("uk-UA") + " грн";
+        }
+    </script>
+</body>
+</html>
